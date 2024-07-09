@@ -8,7 +8,7 @@
             Case test 123 Cross Site request forgering
           </h3>
         </NuxtLink>
-        <UserChip />
+        <UsersChip />
         <p class="text-slate-600 text-sm mb-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc tincidunt ultricies. Nullam nec purus nec nunc tincidunt ultricies.</p>
         <UiChip class="me-2" outline>
           <i class="mdi mdi-application-settings-outline me-1"></i>
