@@ -1,8 +1,11 @@
 <template>
   <div class="flex h-screen">
     <LazyMainMenu />
-    <main class="flex-1 bg-slate-100">
-      <slot />
-    </main>
+    <div class="grow bg-slate-100 h-screen flex flex-col">
+      <LazyMainHeader />
+      <main class="flex-grow overflow-y-auto">
+        <slot />
+      </main>
+    </div>
   </div>
 </template>
