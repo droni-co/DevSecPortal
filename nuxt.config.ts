@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
+      title: 'Developer Portal',
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css' }
