@@ -5,6 +5,11 @@
         <i class="mdi mdi-plus"></i> New security case
       </nuxt-link>
     </UiTitle>
+
+    <SecurityRow />
+    <SecurityRow />
+    <SecurityRow />
+    <SecurityRow />
   </div>
 </template>
 <script setup lang="ts">
