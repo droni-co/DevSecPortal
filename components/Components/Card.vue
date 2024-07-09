@@ -17,14 +17,20 @@
       </UiChip>
     </a>
     <a href="#">
-      <UiChip outline clickable>
+      <UiChip class="me-2" outline clickable>
         <i class="mdi mdi-comment-text-multiple-outline me-1"></i>
         5 Comments
       </UiChip>
     </a>
-
+    <NuxtLink to="/swagger">
+      <UiChip clickable>
+        <i class="mdi mdi-code-block-braces"></i>
+        Swagger Tester
+      </UiChip>
+    </NuxtLink>
   </UiCard>
 </template>
 <script setup lang="ts">
+
 
 </script>
