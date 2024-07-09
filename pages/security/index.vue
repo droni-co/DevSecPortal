@@ -6,6 +6,12 @@
       </nuxt-link>
     </UiTitle>
 
+    <input
+      type="search"
+      class="w-full p-2 border rounded focus:outline-none focus:ring focus:border-rose-500 text-slate-600 mb-4"
+      placeholder="Search security case..."
+      />
+
     <SecurityRow />
     <SecurityRow />
     <SecurityRow />
