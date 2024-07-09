@@ -23,7 +23,7 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Ethical Hacking">
+          <nuxt-link to="/ethical" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Ethical Hacking">
             <i class="mdi mdi-cctv"></i>
           </nuxt-link>
         </li>
