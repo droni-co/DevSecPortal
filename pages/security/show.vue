@@ -1,7 +1,17 @@
 <template>
   <div class="flex h-full">
     <div class="w-3/5 px-3 overflow-auto">
-      <UiTitle icon="mdi mdi-bug-pause-outline" title="Case test 123 Cross Site request forgering" />
+      <UiTitle icon="mdi mdi-bug-pause-outline" title="Case test 123 Cross Site request forgering">
+        <UiFormSelect
+          class="min-w-[10rem]"
+          v-model="status"
+          :options="[
+            { id: 1, name: 'Open' },
+            { id: 2, name: 'Closed' },
+            { id: 3, name: 'In Progress' }
+          ]"
+        />
+      </UiTitle>
       <UiCard>
 
         <UsersChip /> <UsersChip />
@@ -55,6 +65,6 @@
   </div>
 </template>
 <script setup lang="ts">
-
 const activeTab = ref('comments')
+const status = ref(3)
 </script>

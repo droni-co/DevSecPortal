@@ -23,6 +23,17 @@
           </NuxtLink>
         </div>
       </UiCard>
+
+      <UiCard class="mb-3">
+        <UiTitle icon="mdi mdi-security" title="Security Cases" level="h3">
+          <nuxt-link to="/" class="p-2 bg-slate-900 text-slate-100 hover:bg-slate-800 transition rounded-lg">
+            <i class="mdi mdi-plus"></i> New security case
+          </nuxt-link>
+        </UiTitle>
+        <SecurityRow />
+        <SecurityRow />
+        <SecurityRow />
+      </UiCard>
     </div>
     <div class="w-1/4 bg-slate-200 overflow-auto">
       <div class="flex">
