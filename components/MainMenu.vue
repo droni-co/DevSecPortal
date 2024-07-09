@@ -28,7 +28,7 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Swagger Tester">
+          <nuxt-link to="/swagger" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Swagger Tester">
             <i class="mdi mdi-code-block-braces"></i>
           </nuxt-link>
         </li>
