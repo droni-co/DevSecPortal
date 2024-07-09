@@ -18,7 +18,7 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Security Cases">
+          <nuxt-link to="/security" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Security Cases">
             <i class="mdi mdi-security"></i>
           </nuxt-link>
         </li>
