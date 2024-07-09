@@ -1,0 +1,2000 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "version": "2.7.0",
+      "title": "negociosfiduciarios-api-core",
+      "description": "",
+      "license": {
+          "name": "MIT",
+          "url": "https://opensource.org/licenses/MIT"
+      }
+  },
+  "host": "localhost:4200",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+      "http",
+      "https"
+  ],
+  "consumes": [
+      "application/json"
+  ],
+  "produces": [
+      "application/json"
+  ],
+  "paths": {
+      "/ping": {
+          "get": {
+              "summary": "Check if the server is running and returns the server name and version.",
+              "produces": [
+                  "application/json"
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "name": {
+                                  "type": "string"
+                              },
+                              "version": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/clientes": {
+          "get": {
+              "summary": "Get all clientes",
+              "tags": [
+                  "Cliente"
+              ],
+              "description": "This endpoint returns all clientes. If parameters are provided, it returns the clientes that match the parameters.",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "page",
+                      "type": "number",
+                      "description": "The page number to paginate clientes."
+                  },
+                  {
+                      "in": "query",
+                      "name": "nombre_cliente",
+                      "type": "string",
+                      "description": "The name to filter clientes.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "numero_documento",
+                      "type": "string",
+                      "description": "The numero_documento to filter clientes.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "estado_comercial",
+                      "type": "string",
+                      "description": "The estado_comercial to filter clientes.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "identificador_Unico",
+                      "type": "string",
+                      "description": "The identificador_Unico to filter clientes.",
+                      "required": false
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the clientes are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "total": {
+                                  "type": "number",
+                                  "description": "The total number of clientes returned."
+                              },
+                              "clientes": {
+                                  "type": "array",
+                                  "items": {},
+                                  "description": "The clientes returned."
+                              }
+                          }
+                      }
+                  },
+                  "204": {
+                      "description": "No clientes were found."
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          },
+          "post": {
+              "summary": "Create a new cliente",
+              "tags": [
+                  "Cliente"
+              ],
+              "description": "This endpoint creates a new cliente.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "The cliente object to be created.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "id_cliente": {
+                                  "type": "number"
+                              },
+                              "id_colaborador": {
+                                  "type": "string"
+                              },
+                              "id_tipo_cliente": {
+                                  "type": "number"
+                              },
+                              "id_tipo_documento": {
+                                  "type": "number"
+                              },
+                              "numero_documento": {
+                                  "type": "string"
+                              },
+                              "nombre_cliente": {
+                                  "type": "string"
+                              },
+                              "estado_comercial": {
+                                  "type": "string"
+                              },
+                              "correo": {
+                                  "type": "string"
+                              },
+                              "gerente_comercial": {
+                                  "type": "string"
+                              },
+                              "identificador_Unico": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "The operation was successful and the clientes are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number",
+                                  "description": "The status code."
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object",
+                                  "description": "The cliente created."
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/clientes/detail/{id}": {
+          "get": {
+              "summary": "Get a cliente",
+              "tags": [
+                  "Cliente"
+              ],
+              "description": "This endpoint returns a cliente.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "id",
+                      "type": "number",
+                      "description": "The id to filter clientes by id.",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the cliente are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/fideicomisos/fics": {
+          "post": {
+              "summary": "Get a all fics by fideicomiso and user.",
+              "tags": [
+                  "Saldos y Movimientos"
+              ],
+              "description": "This endpoint returns a all fics.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario",
+                              "fideicomiso_codigo"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              },
+                              "fideicomiso_codigo": {
+                                  "type": "number",
+                                  "description": "The fideicomiso code."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fic are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/fideicomisos/summary": {
+          "post": {
+              "summary": "Obtains the fideicomisos with the sum of their balances",
+              "tags": [
+                  "Saldos y Movimientos"
+              ],
+              "description": "This endpoint returns fideicomisos summary.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              },
+                              "fideicomiso_codigo": {
+                                  "type": "number",
+                                  "description": "The fideicomiso code."
+                              },
+                              "fic_numero": {
+                                  "type": "number",
+                                  "description": "The fic number."
+                              },
+                              "movimientos": {
+                                  "type": "boolean",
+                                  "description": "If true, the endpoint will return the last date of the movements."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fideicomisos are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/documentos/download/eeff": {
+          "post": {
+              "summary": "Download Estados Financiero",
+              "tags": [
+                  "Documentos"
+              ],
+              "description": "This endpoint returns a Estados Financiero.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "fideicomiso_codigo"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "Object id of the user."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the EEFF file is returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "name": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No se encontró el archivo"
+                  }
+              }
+          }
+      },
+      "/fic/{numero}": {
+          "get": {
+              "summary": "Get a fic",
+              "tags": [
+                  "Fic"
+              ],
+              "description": "This endpoint returns a fic.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "numero",
+                      "type": "number",
+                      "description": "The number to filter fics.",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fic are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "fic": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          }
+      },
+      "/fideicomisos/detail/{code}": {
+          "get": {
+              "summary": "Get a fideicomiso",
+              "tags": [
+                  "Fideicomiso"
+              ],
+              "description": "This endpoint returns a fideicomiso.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "code",
+                      "type": "number",
+                      "description": "The code to filter fideicomisos by code.",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fideicomiso are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "fidecomiso": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          }
+      },
+      "/fideicomisos": {
+          "get": {
+              "summary": "Get all fideicomisos",
+              "tags": [
+                  "Fideicomiso"
+              ],
+              "description": "This endpoint returns all fideicomisos. If parameters are provided, it returns the fideicomisos that match the parameters.",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "page",
+                      "type": "number",
+                      "description": "The page number to paginate fidecomisos by page."
+                  },
+                  {
+                      "in": "query",
+                      "name": "nombre",
+                      "type": "string",
+                      "description": "The name to filter fideicomisos by nombre."
+                  },
+                  {
+                      "in": "query",
+                      "name": "tipo",
+                      "type": "string",
+                      "description": "The document type to filter fideicomisos by tipo.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "estado",
+                      "type": "string",
+                      "description": "The document type to filter fideicomisos by estado.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "created_at",
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The creation date to filter fideicomisos by date created.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "updated_at",
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The update date to filter fideicomisos by date updated.",
+                      "required": false
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fideicomisos are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object",
+                                  "properties": {
+                                      "total": {
+                                          "type": "number",
+                                          "description": "The total number of fideicomisos returned."
+                                      },
+                                      "fideicomisos": {
+                                          "type": "array",
+                                          "items": {},
+                                          "description": "The fideicomisos returned."
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          },
+          "post": {
+              "summary": "Create a new fideicomiso",
+              "tags": [
+                  "Fideicomiso"
+              ],
+              "description": "This endpoint creates a new fideicomiso.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "The fideicomiso object to be created.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "codigo": {
+                                  "type": "number"
+                              },
+                              "nombre": {
+                                  "type": "string"
+                              },
+                              "tipo": {
+                                  "type": "string"
+                              },
+                              "estado": {
+                                  "type": "string"
+                              },
+                              "apertura": {
+                                  "type": "string",
+                                  "format": "date-time"
+                              },
+                              "dia_entrega": {
+                                  "type": "number"
+                              },
+                              "tipo_entrega": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "The operation was successful and the fideicomiso are created.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "fideicomiso": {
+                                  "type": "object",
+                                  "description": "The fideicomisos returned."
+                              }
+                          }
+                      }
+                  },
+                  "204": {
+                      "description": "The request was successful but there is no content to send back."
+                  },
+                  "400": {
+                      "description": "The request body was incorrect."
+                  },
+                  "500": {
+                      "description": "An error ocurred."
+                  }
+              }
+          }
+      },
+      "/{id_usuario}/fideicomisos": {
+          "get": {
+              "summary": "Get all fideicomisos by user no relations",
+              "tags": [
+                  "Fideicomiso"
+              ],
+              "description": "This endpoint returns all fideicomisos. If parameters are provided, it returns the fideicomisos that match the parameters.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "id_usuario",
+                      "type": "string",
+                      "description": "The user id.",
+                      "required": true
+                  },
+                  {
+                      "in": "query",
+                      "name": "page",
+                      "type": "number",
+                      "description": "The page number to paginate fidecomisos by page."
+                  },
+                  {
+                      "in": "query",
+                      "name": "nombre",
+                      "type": "string",
+                      "description": "The name to filter fideicomisos by nombre."
+                  },
+                  {
+                      "in": "query",
+                      "name": "tipo",
+                      "type": "string",
+                      "description": "The document type to filter fideicomisos by tipo.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "estado",
+                      "type": "string",
+                      "description": "The document type to filter fideicomisos by estado.",
+                      "required": false
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fideicomisos are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object",
+                                  "properties": {
+                                      "total": {
+                                          "type": "number",
+                                          "description": "The total number of fideicomisos returned."
+                                      },
+                                      "fideicomisos": {
+                                          "type": "array",
+                                          "items": {},
+                                          "description": "The fideicomisos returned."
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          }
+      },
+      "/fideicomisos/{codigo}": {
+          "put": {
+              "summary": "Update a fideicomiso",
+              "tags": [
+                  "Fideicomiso"
+              ],
+              "description": "This endpoint updates a fideicomiso.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "codigo",
+                      "type": "number",
+                      "required": true
+                  },
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "The fideicomiso object to be update.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "nombre": {
+                                  "type": "string"
+                              },
+                              "tipo": {
+                                  "type": "string"
+                              },
+                              "estado": {
+                                  "type": "string"
+                              },
+                              "apertura": {
+                                  "type": "string",
+                                  "format": "date-time"
+                              },
+                              "dia_entrega": {
+                                  "type": "number"
+                              },
+                              "tipo_entrega": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fideicomiso are updated.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "fidecomiso": {
+                                  "type": "object",
+                                  "description": "The fideicomiso returned."
+                              }
+                          }
+                      }
+                  },
+                  "204": {
+                      "description": "The request was successful but there is no content to send back or fideicomiso not found."
+                  },
+                  "500": {
+                      "description": "An error ocurred."
+                  }
+              }
+          }
+      },
+      "/fideicomisos/upload": {
+          "post": {
+              "summary": "Create fideicomisos from a list",
+              "tags": [
+                  "Fideicomiso"
+              ],
+              "description": "This endpoint creates fideicomisos.",
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the detail are return.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "exitosos": {
+                                  "type": "object",
+                                  "description": "The detail success.",
+                                  "properties": {
+                                      "cantidad": {
+                                          "type": "number",
+                                          "description": "The total number of fideicomisos created."
+                                      },
+                                      "fideicomisos": {
+                                          "type": "array",
+                                          "items": {}
+                                      }
+                                  }
+                              },
+                              "fallidos": {
+                                  "type": "object",
+                                  "description": "The detail fail.",
+                                  "properties": {
+                                      "cantidad": {
+                                          "type": "number",
+                                          "description": "The total number of fideicomisos fail."
+                                      },
+                                      "fideicomisos": {
+                                          "type": "array",
+                                          "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                  "registro": {
+                                                      "type": "object",
+                                                      "description": "The fideicomiso object."
+                                                  },
+                                                  "error": {
+                                                      "type": "string",
+                                                      "description": "The error message."
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "An error ocurred."
+                  }
+              }
+          }
+      },
+      "/fideicomisos/list": {
+          "post": {
+              "summary": "Get all fideicomisos by user",
+              "tags": [
+                  "Fideicomiso"
+              ],
+              "description": "This endpoint returns all fideicomisos list with name, code and fics by user.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "fideicomiso_codigo"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the fideicomisos are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "array",
+                                  "items": {},
+                                  "description": "The fideicomisos returned."
+                              }
+                          }
+                      }
+                  },
+                  "204": {
+                      "description": "The request was successful but there is no content to send back."
+                  },
+                  "500": {
+                      "description": "An error ocurred."
+                  }
+              }
+          }
+      },
+      "/movimientos": {
+          "get": {
+              "summary": "Get all movimientos",
+              "tags": [
+                  "Movimientos"
+              ],
+              "description": "This endpoint returns all movimientos. If parameters are provided, it returns the movimientos that match the parameters.",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "page",
+                      "type": "number",
+                      "description": "The page number to paginate movimientos by page."
+                  },
+                  {
+                      "in": "query",
+                      "name": "nombre",
+                      "type": "string",
+                      "description": "The name to filter movimientos by nombre."
+                  },
+                  {
+                      "in": "query",
+                      "name": "tipo",
+                      "type": "string",
+                      "description": "The document type to filter movimientos by tipo.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "fecha",
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date to filter movimientos.",
+                      "required": false
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      },
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          }
+      },
+      "/movimientos/detail/{id}": {
+          "get": {
+              "summary": "Get a movimiento",
+              "tags": [
+                  "Movimientos"
+              ],
+              "description": "This endpoint returns a movimiento.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "id",
+                      "type": "number",
+                      "description": "The id to filter movimientos.",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the movimiento is returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          }
+      },
+      "/fideicomisos/fic/movimientos": {
+          "post": {
+              "summary": "Get a all movimientos by fideicomiso, fic and user.",
+              "tags": [
+                  "Saldos y Movimientos"
+              ],
+              "description": "This endpoint returns a all movimientos.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario",
+                              "fideicomiso_codigo",
+                              "fic_numero"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              },
+                              "fideicomiso_codigo": {
+                                  "type": "number",
+                                  "description": "The fideicomiso code."
+                              },
+                              "fic_numero": {
+                                  "type": "number",
+                                  "description": "The fic number."
+                              },
+                              "fullData": {
+                                  "type": "boolean",
+                                  "description": "If true, returns all movimientos data."
+                              },
+                              "take": {
+                                  "type": "number",
+                                  "description": "The number of movimientos to take."
+                              },
+                              "page": {
+                                  "type": "number",
+                                  "description": "The page number."
+                              },
+                              "fechaInicio": {
+                                  "type": "string",
+                                  "description": "The fecha filter."
+                              },
+                              "fechaFin": {
+                                  "type": "string",
+                                  "description": "The fecha filter."
+                              },
+                              "tipo": {
+                                  "type": "string",
+                                  "description": "The tipo movimiento filter."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the movimientos are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/participaciones": {
+          "get": {
+              "summary": "Get all participaciones",
+              "tags": [
+                  "Participacion"
+              ],
+              "description": "This endpoint returns all participaciones. If parameters are provided, it returns the participaciones that match the parameters.",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "page",
+                      "type": "number",
+                      "description": "The page number to paginate participaciones."
+                  },
+                  {
+                      "in": "query",
+                      "name": "created_at",
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The creation date to filter participaciones.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "updated_at",
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The update date to filter participaciones.",
+                      "required": false
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the participaciones are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "total": {
+                                  "type": "number",
+                                  "description": "The total number of participaciones returned."
+                              },
+                              "participaciones": {
+                                  "type": "array",
+                                  "items": {},
+                                  "description": "The participaciones returned."
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No participaciones were found."
+                  }
+              }
+          },
+          "post": {
+              "summary": "Create a new participacion",
+              "tags": [
+                  "Participacion"
+              ],
+              "description": "This endpoint creates a new participacion.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "The participacion object to be created.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "porcentaje": {
+                                  "type": "number"
+                              },
+                              "fideicomiso_code": {
+                                  "type": "string"
+                              },
+                              "cliente_numero_documento": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "The operation was successful and the participacion are created.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "message": {
+                                  "type": "string"
+                              },
+                              "participacion": {
+                                  "type": "object",
+                                  "description": "The participacion returned."
+                              }
+                          }
+                      }
+                  },
+                  "204": {
+                      "description": "The request was successful but there is no content to send back."
+                  },
+                  "400": {
+                      "description": "The request body was incorrect."
+                  },
+                  "500": {
+                      "description": "An error ocurred."
+                  }
+              }
+          }
+      },
+      "/participaciones/{id}": {
+          "get": {
+              "summary": "Get all participaciones by id",
+              "tags": [
+                  "Participacion"
+              ],
+              "description": "This endpoint returns the participaciones with participaciones that match the id.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "id",
+                      "type": "number",
+                      "description": "The id to filter participaciones.",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the participaciones are returned.",
+                      "schema": {
+                          "type": "object",
+                          "description": "The participacion returned."
+                      }
+                  },
+                  "404": {
+                      "description": "No participaciones were found."
+                  }
+              }
+          },
+          "put": {
+              "summary": "Update a participacion",
+              "tags": [
+                  "Participacion"
+              ],
+              "description": "This endpoint updates a participacion with the given id.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "id",
+                      "required": true,
+                      "description": "The id of the participacion to be updated.",
+                      "type": "integer"
+                  },
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "The participacion object to be updated.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "porcentaje": {
+                                  "type": "number"
+                              },
+                              "fideicomiso_code": {
+                                  "type": "string"
+                              },
+                              "cliente_numero_documento": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the participacion was updated."
+                  },
+                  "400": {
+                      "description": "The request body was incorrect."
+                  },
+                  "500": {
+                      "description": "An error occurred."
+                  }
+              }
+          }
+      },
+      "/participaciones-detail": {
+          "get": {
+              "summary": "Get all participaciones by filter params",
+              "tags": [
+                  "Participacion"
+              ],
+              "description": "This endpoint returns the participaciones with participaciones that match the filters.",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "fideicomiso_code",
+                      "type": "number",
+                      "description": "The fideicomiso code to filter participaciones.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "cliente_numero_documento",
+                      "type": "string",
+                      "description": "The document cliente to filter participaciones.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "id_usuario",
+                      "type": "number",
+                      "description": "The usuario id to filter participaciones.",
+                      "required": false
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the participaciones are returned.",
+                      "schema": {
+                          "type": "object",
+                          "description": "The participacion returned."
+                      }
+                  },
+                  "404": {
+                      "description": "No participaciones were found."
+                  }
+              }
+          }
+      },
+      "/participaciones/upload": {
+          "post": {
+              "summary": "Create new participaciones from body",
+              "tags": [
+                  "Participacion"
+              ],
+              "description": "This endpoint creates new participaciones from json/body.",
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the participaciones are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "exitosos": {
+                                  "type": "object",
+                                  "description": "The detail success.",
+                                  "properties": {
+                                      "cantidad": {
+                                          "type": "number",
+                                          "description": "The total number of participaciones created."
+                                      },
+                                      "participaciones": {
+                                          "type": "array",
+                                          "items": {}
+                                      }
+                                  }
+                              },
+                              "fallidos": {
+                                  "type": "object",
+                                  "description": "The detail fail.",
+                                  "properties": {
+                                      "cantidad": {
+                                          "type": "number",
+                                          "description": "The total number of participaciones fail."
+                                      },
+                                      "participaciones": {
+                                          "type": "array",
+                                          "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                  "registro": {
+                                                      "type": "object",
+                                                      "description": "The cliente object."
+                                                  },
+                                                  "error": {
+                                                      "type": "string",
+                                                      "description": "The error message."
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/radicacion/add": {
+          "post": {
+              "summary": "Create a new radicacion documental",
+              "tags": [
+                  "Radicacion Documental"
+              ],
+              "description": "This endpoint creates a new radicacion documental.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario",
+                              "fideicomiso_codigo"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              },
+                              "fideicomiso_codigo": {
+                                  "type": "number",
+                                  "description": "The fideicomiso code."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the radicacion documental are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/radicacion/getRadicacion": {
+          "post": {
+              "summary": "Get a radicacion documental",
+              "tags": [
+                  "Radicacion Documental"
+              ],
+              "description": "This endpoint gets a radicacion documental.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario",
+                              "fideicomiso_codigo"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              },
+                              "fideicomiso_codigo": {
+                                  "type": "number",
+                                  "description": "The fideicomiso code."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the radicacion documental are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/radicacion": {
+          "post": {
+              "summary": "Get list radicacion documental",
+              "tags": [
+                  "Radicacion Documental"
+              ],
+              "description": "This endpoint gets a radicacion documental.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the radicacion documental are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/radicacion/download": {
+          "post": {
+              "summary": "Download file to radicacion documental",
+              "tags": [
+                  "Radicacion Documental"
+              ],
+              "description": "This endpoint download a file to radicacion documental.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario",
+                              "fideicomiso_codigo",
+                              "file"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The user id."
+                              },
+                              "fideicomiso_codigo": {
+                                  "type": "number",
+                                  "description": "The fideicomiso code."
+                              },
+                              "file": {
+                                  "type": "string",
+                                  "description": "The file name."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the radicacion documental file are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/saldos": {
+          "get": {
+              "summary": "Get all saldos",
+              "tags": [
+                  "Saldo"
+              ],
+              "description": "This endpoint returns all saldos. If parameters are provided, it returns the saldos that match the parameters.",
+              "parameters": [
+                  {
+                      "in": "query",
+                      "name": "page",
+                      "type": "number",
+                      "description": "The page number to paginate saldos by page."
+                  },
+                  {
+                      "in": "query",
+                      "name": "saldo_total",
+                      "type": "number",
+                      "description": "The saldo_total to filter saldos by nombre."
+                  },
+                  {
+                      "in": "query",
+                      "name": "saldo_disponible",
+                      "type": "number",
+                      "description": "The saldo_disponible to filter saldos by tipo.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "saldo_neto",
+                      "type": "number",
+                      "description": "The saldo_neto to filter saldos by estado.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "saldo_rendimiento",
+                      "type": "number",
+                      "description": "The saldo_rendimiento to filter saldos .",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "control_cancelacion",
+                      "type": "number",
+                      "description": "The update date to filter saldos.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "gmf",
+                      "type": "number",
+                      "description": "The gmf to filter saldos.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "canje",
+                      "type": "number",
+                      "description": "The canje to filter saldos.",
+                      "required": false
+                  },
+                  {
+                      "in": "query",
+                      "name": "reservado",
+                      "type": "number",
+                      "description": "The reservado to filter saldos.",
+                      "required": false
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the saldos are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object",
+                                  "properties": {
+                                      "total": {
+                                          "type": "number",
+                                          "description": "The total number of saldos returned."
+                                      },
+                                      "saldos": {
+                                          "type": "array",
+                                          "items": {},
+                                          "description": "The saldos returned."
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          }
+      },
+      "/saldos/{id}": {
+          "get": {
+              "summary": "Get a saldo",
+              "tags": [
+                  "Saldo"
+              ],
+              "description": "This endpoint returns a saldo.",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "id",
+                      "type": "number",
+                      "description": "The id to filter saldos by code.",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the saldo are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "saldo": {
+                                  "type": "object"
+                              }
+                          }
+                      }
+                  },
+                  "404": {
+                      "description": "No fidecomitentes were found."
+                  }
+              }
+          }
+      },
+      "/getClientes": {
+          "post": {
+              "summary": "Get all clientes by id_usuario",
+              "tags": [
+                  "EEFF"
+              ],
+              "description": "This endpoint returns the clientes with fideicomisos that match the id_usuario.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "The body of the request.",
+                      "schema": {
+                          "type": "object",
+                          "required": [
+                              "id_usuario"
+                          ],
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string",
+                                  "description": "The id_usuario to filter clientes."
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the clientes are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "usuario": {
+                                  "type": "object",
+                                  "items": {},
+                                  "description": "The cliente returned."
+                              }
+                          }
+                      }
+                  },
+                  "204": {
+                      "description": "No clientes were found."
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/usuarios": {
+          "post": {
+              "summary": "Create a new usuario",
+              "tags": [
+                  "Usuario"
+              ],
+              "description": "This endpoint creates a new usuario.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "The usuario object to be created.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "id_usuario": {
+                                  "type": "string"
+                              },
+                              "id_tipo_documento": {
+                                  "type": "number"
+                              },
+                              "nombre_apellido": {
+                                  "type": "string"
+                              },
+                              "nombre_login": {
+                                  "type": "string"
+                              },
+                              "numero_documento": {
+                                  "type": "string"
+                              },
+                              "correo": {
+                                  "type": "string"
+                              },
+                              "numero_celular": {
+                                  "type": "string"
+                              },
+                              "estado": {
+                                  "type": "number"
+                              },
+                              "id_token": {
+                                  "type": "number"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "The operation was successful and the usuario are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number",
+                                  "description": "The status code."
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object",
+                                  "description": "The usuario created."
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/usuarios/clientes": {
+          "post": {
+              "summary": "Create a new relation usuario - cliente",
+              "tags": [
+                  "Usuario"
+              ],
+              "description": "This endpoint creates a new relation.",
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "required": true,
+                      "description": "The relation object to be created.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "documento_usuario": {
+                                  "type": "string"
+                              },
+                              "documento_cliente": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "201": {
+                      "description": "The operation was successful and the relation are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number",
+                                  "description": "The status code."
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "content": {
+                                  "type": "object",
+                                  "description": "The relation created."
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      },
+      "/usuarios/relations": {
+          "post": {
+              "summary": "Create new relations of usuario - cliente from body",
+              "tags": [
+                  "Usuario"
+              ],
+              "description": "This endpoint creates new relations from json/body.",
+              "responses": {
+                  "200": {
+                      "description": "The operation was successful and the relations are returned.",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "code": {
+                                  "type": "number"
+                              },
+                              "message": {
+                                  "type": "string"
+                              },
+                              "exitosos": {
+                                  "type": "object",
+                                  "description": "The detail success.",
+                                  "properties": {
+                                      "cantidad": {
+                                          "type": "number",
+                                          "description": "The total number of relations created."
+                                      },
+                                      "relations": {
+                                          "type": "array",
+                                          "items": {}
+                                      }
+                                  }
+                              },
+                              "fallidos": {
+                                  "type": "object",
+                                  "description": "The detail fail.",
+                                  "properties": {
+                                      "cantidad": {
+                                          "type": "number",
+                                          "description": "The total number of relations fail."
+                                      },
+                                      "relations": {
+                                          "type": "array",
+                                          "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                  "registro": {
+                                                      "type": "object",
+                                                      "description": "The relations object."
+                                                  },
+                                                  "error": {
+                                                      "type": "string",
+                                                      "description": "The error message."
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  "500": {
+                      "description": "Internal server error."
+                  }
+              }
+          }
+      }
+  },
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {}
+}
