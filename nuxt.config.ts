@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   modules: [
-    '@nuxtjs/tailwindcss'
+    "nuxt-monaco-editor",
+    "@nuxtjs/tailwindcss"
   ],
   app: {
     head: {
@@ -12,6 +13,14 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css' }
       ]
+    }
+  },
+  monacoEditor: {
+    // These are default values:
+    locale: 'en',
+    componentName: {
+      codeEditor: 'MonacoEditor',
+      diffEditor: 'MonacoDiffEditor'
     }
   }
 })

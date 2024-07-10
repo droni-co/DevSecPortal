@@ -9,15 +9,15 @@
           {{ (mehtod as any)?.summary }}
           <div v-if="openPath === `[${methodIndex}]${urlIndex}`" class="border rounded p-2">
             <div class="py-2">
-              <UiChip outline v-for="param in (mehtod as any)?.parameters ?? []">
-                {{ param.name }} "{{ param.in }}"              
+              <UiChip class="md-2" outline v-for="param in (mehtod as any)?.parameters ?? []">
+                {{ param.in }}: {{ param.name }}
               </UiChip>
             </div>
-            <UiFormButton outline size="s" @click="response = { data: urlIndex + ' Unauthorized' }">
+            <UiFormButton outline size="s" @click="response = JSON.stringify({ data: urlIndex + ' Unauthorized' })">
               <i class="mdi mdi-invoice-send-outline"></i>
               Test endpoint
             </UiFormButton>
-            <UiFormButton outline size="s" @click="response = path">
+            <UiFormButton outline size="s" @click="response = JSON.stringify(path)">
               <i class="mdi mdi-file-document-outline"></i>
               View docs
             </UiFormButton>
@@ -25,14 +25,12 @@
         </div>
       </div>
     </div>
-    <div class="w-1/2 p-3 bg-slate-900 overflow-auto text-white break-words">
-      <code>{{ JSON.stringify(response) }}</code>
-    </div>
+    <MonacoEditor v-model="response" lang="markdown" :options="{ theme: 'vs-dark',  wordWrap: 'on', tabSize: 2 }" class="w-1/2" />
   </div>
 </template>
 <script setup lang="ts">
 import ExampleSwagger from '../../data/exampleSwagger.json'
 const openPath = ref('[get]/ping')
-const response = ref({})
+const response = ref('')
 
 </script>
