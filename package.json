@@ -19,9 +19,7 @@
     "nuxt": "^3.12.3",
     "nuxt-monaco-editor": "^1.2.9",
     "vue": "latest",
-    "vue-chart-3": "^3.1.8"
-  },
-  "devDependencies": {
+    "vue-chart-3": "^3.1.8",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@tailwindcss/typography": "^0.5.13"
   }
