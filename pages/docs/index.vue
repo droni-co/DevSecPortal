@@ -10,6 +10,33 @@
           </li>
         </ul>
       </UiCollapse>
+      <UiCollapse title="Frontend documentation" class="mb-3" group="parent">
+        <ul>
+          <li v-for="path in ExampleSwagger.paths" :key="path">
+            <button @click="openPath = path" class="block w-full p-2 text-left bg-slate-900 text-slate-100 transition hover:bg-slate-400">
+              {{ path?.post?.summary ?? path?.get?.summary }}
+            </button>
+          </li>
+        </ul>
+      </UiCollapse>
+      <UiCollapse title="Security" class="mb-3" group="parent">
+        <ul>
+          <li v-for="path in ExampleSwagger.paths" :key="path">
+            <button @click="openPath = path" class="block w-full p-2 text-left bg-slate-900 text-slate-100 transition hover:bg-slate-400">
+              {{ path?.post?.summary ?? path?.get?.summary }}
+            </button>
+          </li>
+        </ul>
+      </UiCollapse>
+      <UiCollapse title="DevOps" class="mb-3" group="parent">
+        <ul>
+          <li v-for="path in ExampleSwagger.paths" :key="path">
+            <button @click="openPath = path" class="block w-full p-2 text-left bg-slate-900 text-slate-100 transition hover:bg-slate-400">
+              {{ path?.post?.summary ?? path?.get?.summary }}
+            </button>
+          </li>
+        </ul>
+      </UiCollapse>
     </div>
     <div class="flex flex-col h-full w-full border">
       <div class="flex items-center justify-between px-2 bg-slate-800 text-slate-100 w-100">
