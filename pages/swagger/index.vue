@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <MonacoEditor v-model="response" lang="markdown" :options="{ theme: 'vs-dark',  wordWrap: 'on', tabSize: 2 }" class="w-1/2" />
+    <MonacoEditor v-model="response" lang="json" :options="{ theme: 'vs-dark',  wordWrap: 'on', tabSize: 2, readOnly: true }" class="w-1/2" />
   </div>
 </template>
 <script setup lang="ts">
