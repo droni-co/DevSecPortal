@@ -13,11 +13,11 @@
                 {{ param.in }}: {{ param.name }}
               </UiChip>
             </div>
-            <UiFormButton outline size="s" @click="response = JSON.stringify({ data: urlIndex + ' Unauthorized' })">
+            <UiFormButton outline size="s" @click="response = JSON.stringify({ data: urlIndex + ' Unauthorized' }, null, '  ')">
               <i class="mdi mdi-invoice-send-outline"></i>
               Test endpoint
             </UiFormButton>
-            <UiFormButton outline size="s" @click="response = JSON.stringify(path)">
+            <UiFormButton outline size="s" @click="response = JSON.stringify(path, null, '  ')">
               <i class="mdi mdi-file-document-outline"></i>
               View docs
             </UiFormButton>
