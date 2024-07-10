@@ -4,8 +4,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     "nuxt-monaco-editor",
-    "@nuxtjs/tailwindcss"
-  ],
+    "@nuxtjs/tailwindcss",
+    "@nuxt/content",
+    "@nuxt/image"],
   app: {
     head: {
       title: 'Developer Portal',

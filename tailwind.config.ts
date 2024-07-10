@@ -8,5 +8,8 @@ export default <Partial<Config>>{
       mono: ['Menlo', 'monospace']
     },
     extend: {}
-  }
+  },
+  plugins: [
+    require('@tailwindcss/typography')
+  ]
 }
