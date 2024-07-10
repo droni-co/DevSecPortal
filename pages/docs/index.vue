@@ -43,7 +43,7 @@
         <h1 class="text-lg grow">Document to edit</h1>
         <button class="p-2 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="view" @click="view = !view">
           <i class="mdi mdi-eye-outline"></i>
-          View
+          View / Edit
         </button>
         <button class="p-2 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Save">
           <i class="mdi mdi-content-save-outline"></i>
@@ -53,7 +53,7 @@
       <div v-if="view" class="w-3/4 grow w-full bg-white block p-3 overflow-auto">
         <article class="prose" v-html="markdown.render(String(response))"></article>
       </div>
-      <MonacoEditor v-else v-model="response" lang="markdown" :options="{ theme: 'vs-dark',  wordWrap: 'on', tabSize: 2, readOnly: true }" class="w-3/4 grow" />
+      <MonacoEditor v-else v-model="response" lang="markdown" :options="{ theme: 'vs-dark',  wordWrap: 'on', tabSize: 2 }" class="w-3/4 grow" />
     </div>
   </div>
 </template>
