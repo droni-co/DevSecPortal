@@ -38,7 +38,7 @@
         </ul>
       </UiCollapse>
     </div>
-    <div class="flex flex-col h-full w-full border">
+    <div class="flex flex-col h-full w-3/4 border">
       <div class="flex items-center justify-between px-2 bg-slate-800 text-slate-100 w-100">
         <h1 class="text-lg grow">Document to edit</h1>
         <button class="p-2 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="view" @click="view = !view">
@@ -50,10 +50,10 @@
           Save
         </button>
       </div>
-      <div v-if="view" class="w-3/4 grow w-full bg-white block p-3 overflow-auto">
+      <div v-if="view" class="grow w-full bg-white block p-3 overflow-auto">
         <article class="prose" v-html="markdown.render(String(response))"></article>
       </div>
-      <MonacoEditor v-else v-model="response" lang="markdown" :options="{ theme: 'vs-dark',  wordWrap: 'on', tabSize: 2 }" class="w-3/4 grow" />
+      <MonacoEditor v-else v-model="response" lang="markdown" :options="{ theme: 'vs-dark',  wordWrap: 'on', tabSize: 2 }" class="grow w-full" />
     </div>
   </div>
 </template>
