@@ -33,6 +33,11 @@
           </nuxt-link>
         </li>
         <li>
+          <nuxt-link to="/libraries" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Library Tracking">
+            <i class="mdi mdi-package-variant"></i>
+          </nuxt-link>
+        </li>
+        <li>
           <nuxt-link to="/docs" class="block p-3 bg-slate-900 text-slate-100 transition hover:bg-slate-400" title="Documentation">
             <i class="mdi mdi-text-box-search-outline"></i>
           </nuxt-link>
